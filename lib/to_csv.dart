@@ -70,7 +70,7 @@ myCSV(List<String> headerRow, List<List<String>> listOfListOfStrings,
     Uint8List bytes2 = Uint8List.fromList(bytes);
     MimeType type = MimeType.csv;
     String? unknownValue = await FileSaver.instance.saveAs(
-        name: '$filename-$formattedData.csv',
+        name: '$filename-$formattedData',
         bytes: bytes2,
         ext: 'csv',
         mimeType: type);
