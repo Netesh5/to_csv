@@ -69,12 +69,13 @@ myCSV(List<String> headerRow, List<List<String>> listOfListOfStrings,
     final bytes = utf8.encode(csvData);
     Uint8List bytes2 = Uint8List.fromList(bytes);
     MimeType type = MimeType.csv;
-    String? unknownValue = await FileSaver.instance.saveAs(
-        name: '$filename-$formattedData',
-        bytes: bytes2,
-        ext: 'csv',
-        mimeType: type);
-    print("value $unknownValue");
+    String? value = await FileSaver.instance.saveAs(
+      name: '$filename-$formattedData',
+      bytes: bytes2,
+      ext: 'csv',
+      mimeType: type,
+    );
+    debugPrint("value $value");
     if (sharing == true) {
       XFile xFile = XFile.fromData(bytes2);
       await Share.shareXFiles([xFile], text: 'Csv File');
