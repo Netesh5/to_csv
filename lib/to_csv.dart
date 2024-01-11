@@ -10,8 +10,8 @@ import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 import 'package:universal_html/html.dart' as html;
 
-myCSV(List<String> headerRow, List<List<String>> listOfListOfStrings,
-    String filename,
+Future<String?> myCSV(List<String> headerRow,
+    List<List<String>> listOfListOfStrings, String filename,
     {bool sharing = false}) async {
   debugPrint("***** Gonna Create cv");
 
@@ -56,6 +56,7 @@ myCSV(List<String> headerRow, List<List<String>> listOfListOfStrings,
     html.document.body!.children.add(anchor);
     anchor.click();
     html.Url.revokeObjectUrl(url);
+    return "Csv Saved successfully";
   } else if (Platform.isAndroid ||
       Platform.isIOS ||
       Platform.isWindows ||
@@ -75,10 +76,13 @@ myCSV(List<String> headerRow, List<List<String>> listOfListOfStrings,
       ext: 'csv',
       mimeType: type,
     );
+
     debugPrint("value $value");
     if (sharing == true) {
       XFile xFile = XFile.fromData(bytes2);
       await Share.shareXFiles([xFile], text: 'Csv File');
     }
+    return value ?? "Csv Saved successfully";
   }
+  return null;
 }
